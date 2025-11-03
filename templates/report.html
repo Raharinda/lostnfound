@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block title %}Laporkan Barang - Lost & Found UGM{% endblock %} {% block content %}
+<section class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md">
+  <h1 class="text-3xl font-bold text-center mb-6 text-blue-700">Laporkan Barang Hilang / Ditemukan</h1>
+
+  <form method="POST" enctype="multipart/form-data" class="space-y-5">
+    <div>
+      <label for="reporter" class="block font-semibold mb-1 text-gray-700">Nama Pelapor</label>
+      <input type="text" name="reporter" id="reporter" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh: Daffa Izdihar" required />
+    </div>
+
+    <div>
+      <label for="item_name" class="block font-semibold mb-1 text-gray-700">Nama Barang</label>
+      <input type="text" name="item_name" id="item_name" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh: Dompet kulit coklat" required />
+    </div>
+
+    <div>
+      <label for="type" class="block font-semibold mb-1 text-gray-700">Jenis Laporan</label>
+      <select name="type" id="type" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none">
+        <option value="Hilang">Barang Hilang</option>
+        <option value="Ditemukan">Barang Ditemukan</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="description" class="block font-semibold mb-1 text-gray-700">Deskripsi Barang</label>
+      <textarea
+        name="description"
+        id="description"
+        rows="4"
+        class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+        placeholder="Tuliskan ciri-ciri barang, lokasi terakhir terlihat, waktu, dll."
+        required
+      ></textarea>
+    </div>
+
+    <div>
+      <label for="image" class="block font-semibold mb-1 text-gray-700">Upload Foto (opsional)</label>
+      <input
+        type="file"
+        name="image"
+        id="image"
+        accept="image/*"
+        class="w-full text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition"
+      />
+      <p class="text-xs text-gray-500 mt-1">Format yang didukung: JPG, PNG, atau JPEG.</p>
+    </div>
+
+    <div class="pt-4 flex justify-end">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow">Kirim Laporan</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

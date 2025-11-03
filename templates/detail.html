@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block title %}Detail Barang - Lost & Found UGM{% endblock %} {% block content %} {% if report %}
+<div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+  {% if report[5] %}
+  <img src="{{ url_for('static', filename='uploads/' + report[5].split('/')[-1]) }}" alt="Gambar Barang" class="w-full h-96 object-cover" />
+  {% else %}
+  <div class="w-full h-96 bg-gray-200 flex items-center justify-center text-gray-500 text-lg">Tidak ada gambar</div>
+  {% endif %}
+
+  <div class="p-8">
+    <h1 class="text-3xl font-bold text-blue-700 mb-2">{{ report[2] }}</h1>
+    <p class="text-gray-600 mb-4">Dilaporkan oleh <span class="font-semibold">{{ report[1] }}</span></p>
+
+    <span class="inline-block mb-4 px-4 py-1 rounded-full text-white text-sm {% if report[3] == 'Hilang' %}bg-red-500{% else %}bg-green-500{% endif %}"> {{ report[3] }} </span>
+
+    <p class="text-gray-800 leading-relaxed mb-6 whitespace-pre-line">{{ report[4] }}</p>
+
+    <a href="/" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"> ← Kembali ke Daftar </a>
+  </div>
+</div>
+{% else %}
+<p class="text-center text-gray-600">Laporan tidak ditemukan.</p>
+{% endif %} {% endblock %}

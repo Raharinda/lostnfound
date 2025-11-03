@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Lost & Found UGM{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Favicon dan Meta -->
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/id/3/3b/Logo_UGM.png" />
+    <meta name="description" content="Sistem Pelaporan Barang Hilang & Ditemukan UGM" />
+    <meta name="author" content="Tim Lost & Found UGM" />
+
+    <!-- Custom Style tambahan -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .nav-active {
+        color: #2563eb;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <a href="/" class="flex items-center space-x-2">
+          <img src="https://upload.wikimedia.org/wikipedia/id/3/3b/Logo_UGM.png" alt="UGM" class="w-8 h-8" />
+          <span class="text-2xl font-bold text-blue-700">Lost & Found UGM</span>
+        </a>
+        <div class="space-x-6 text-gray-600">
+          <a href="/" class="{% if request.path == '/' %}nav-active{% endif %} hover:text-blue-600 transition">Beranda</a>
+          <a href="/report" class="{% if request.path.startswith('/report') %}nav-active{% endif %} hover:text-blue-600 transition">Laporkan Barang</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 mt-20 mb-10 max-w-6xl mx-auto px-4">{% block content %} {% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-6 mt-auto text-center text-sm text-gray-500">
+      <div>&copy; {{ 2025 }} Tim Lost & Found UGM. Dibangun dengan 💙 menggunakan Flask & TailwindCSS.</div>
+      <div class="mt-1">
+        <a href="https://www.ugm.ac.id/" target="_blank" class="hover:text-blue-600 underline">Universitas Gadjah Mada</a>
+      </div>
+    </footer>
+  </body>
+</html>

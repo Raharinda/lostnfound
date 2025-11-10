@@ -24,6 +24,10 @@ def search():
 def notifications():
     return "Halaman Notifikasi"
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 @app.route('/profile')
 def profile():
     return "Halaman Profile"

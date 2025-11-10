@@ -17,9 +17,20 @@
   </div>
 
 
-  <div class="flex gap-4">
-    <a href="/" class="hover:text-blue-400">Home</a>
-    <a href="/profile" class="hover:text-blue-400">Profile</a>
-    <a href="/login" class="hover:text-blue-400">Login</a>
-  </div>
+  <div class="flex items-center gap-6">
+    <a href="/" class="text-gray-200 hover:text-blue-400 transition-colors duration-300">Home</a>
+    <a href="/profile" class="text-gray-200 hover:text-blue-400 transition-colors duration-300">Profile</a>
+
+    <!-- Auth buttons -->
+    <div class="flex gap-3">
+      <a href="/login" 
+         class="px-4 py-2 rounded-lg border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition-all duration-300">
+         Login
+      </a>
+      <a href="/signup" 
+         class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300">
+         Sign Up
+      </a>
+    </div>
+
 </nav>

@@ -2,15 +2,22 @@ from flask import Flask, render_template, request, redirect, jsonify
 
 app = Flask(__name__)
 
+# ====== ROUTE UTAMA ======
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html')  # dashboard utama
 
+# ====== ROUTE TAMBAHAN UNTUK NAVBAR ======
+@app.route('/navbar')
+def navbar():
+    return render_template('navbar.html')  # ini render file navbar.html
+
+# ====== FITUR TAMBAHAN ======
 @app.route('/search')
 def search():
     query = request.args.get('q', '')
     print(f"Pencarian: {query}")
-    # Proses pencarian di sini
+    # Tambahkan logika pencarian di sini
     return redirect('/')
 
 @app.route('/notifications')
@@ -31,7 +38,10 @@ def get_code():
 
 @app.route('/toggle-theme', methods=['POST'])
 def toggle_theme():
+    # misal nanti kamu tambahkan logic dark/light mode
     return jsonify({'success': True})
 
+
+# ====== RUNNING SERVER ======
 if __name__ == '__main__':
     app.run(debug=True)

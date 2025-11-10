@@ -1,0 +1,65 @@
+{% extends '../base.html' %}
+
+{% block title %}Beranda - Lost & Found UGM{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-br from-blue-800 to-blue-600 text-white py-20 rounded-2xl shadow-lg mb-12 overflow-hidden">
+  <!-- Optional overlay pattern -->
+  <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/geometry.png')]"></div>
+  
+  <div class="relative container mx-auto px-6 text-center z-10">
+    <img src="{{ url_for('static', filename='ugm_logo.png') }}" alt="Logo UGM" 
+         class="mx-auto mb-6 w-28 h-28 rounded-full bg-white p-2 shadow-lg">
+    
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Selamat Datang di Lost & Found UGM</h1>
+    <p class="text-blue-100 text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
+      Mengembalikan Barang, Menyambung Kebaikan.  
+      Temukan atau laporkan barang hilang di lingkungan Universitas Gadjah Mada.
+    </p>
+    
+    <a href="/report" 
+       class="bg-yellow-400 text-blue-900 font-semibold px-8 py-3 rounded-full shadow-md hover:bg-yellow-300 transition">
+       💼 Laporkan Barang Hilang / Ditemukan
+    </a>
+  </div>
+</section>
+
+<!-- List Section -->
+<section class="container mx-auto px-4">
+  <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">Daftar Barang Terbaru</h2>
+
+  {% if reports %}
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for report in reports %}
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+      {% if report[5] %}
+      <img src="{{ url_for('static', filename='uploads/' + report[5].split('/')[-1]) }}" 
+           alt="Gambar Barang" class="h-48 w-full object-cover">
+      {% else %}
+      <div class="h-48 w-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+        Tidak ada gambar
+      </div>
+      {% endif %}
+
+      <div class="p-5">
+        <h3 class="text-xl font-bold text-blue-700">{{ report[2] }}</h3>
+        <p class="text-sm text-gray-600 mb-1">Dilaporkan oleh {{ report[1] }}</p>
+        <span class="inline-block mt-1 px-3 py-1 rounded-full text-white text-sm 
+          {% if report[3] == 'Hilang' %}bg-red-500{% else %}bg-green-500{% endif %}">
+          {{ report[3] }}
+        </span>
+        <p class="text-gray-700 mt-2 line-clamp-2">{{ report[4][:100] }}...</p>
+        <a href="{{ url_for('detail', report_id=report[0]) }}" 
+           class="block mt-4 text-blue-600 hover:text-blue-800 font-medium">
+           Lihat Detail →
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-center text-gray-600 mt-10 text-lg">Belum ada laporan barang yang tercatat.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -23,11 +23,11 @@
 
     <!-- Auth buttons -->
     <div class="flex gap-3">
-      <a href="/login" 
+      <a href="{{ url_for('auth_bp.login') }}" 
          class="px-4 py-2 rounded-lg border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition-all duration-300">
          Login
       </a>
-      <a href="/signup" 
+      <a href="{{ url_for('auth_bp.signup') }}" 
          class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300">
          Sign Up
       </a>

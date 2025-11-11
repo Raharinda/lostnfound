@@ -1,32 +1,46 @@
 {% extends 'base.html' %}
 
-{% block title %}Laporkan Barang - Lost & Found UGM{% endblock %}
+{% block title %}Buat Laporan{% endblock %}
 
 {% block content %}
-<div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-md border border-gray-200 text-blue-800">
-  <h1 class="text-2xl font-bold mb-6 text-center">
-    💼 Laporkan Barang Hilang / Ditemukan
-  </h1>
+<div class="min-h-screen flex items-center justify-center bg-gray-800">
+  <div class="bg-white rounded-xl shadow-xl p-10 w-full max-w-lg">
+    <h2 class="text-2xl font-bold text-blue-400 text-center mb-8">Buat Laporan Kehilangan</h2>
 
-  <form method="POST" enctype="multipart/form-data" class="space-y-5">
-    <input type="text" name="name" placeholder="Nama Pelapor" 
-           class="w-full p-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+    <form method="POST" action="{{ url_for('report_bp.report') }}" class="space-y-5">
+      <div>
+        <label class="block text-sm text-gray-700">Nama Barang</label>
+        <input type="text" name="item_name" required
+               class="w-full border-b border-gray-300 py-2 focus:outline-none text-sm text-blue-400"
+               placeholder="Misal: Dompet hitam" />
+      </div>
 
-    <input type="text" name="item_name" placeholder="Nama Barang" 
-           class="w-full p-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+      <div>
+        <label class="block text-sm text-gray-700">Deskripsi</label>
+        <textarea name="description" rows="3"
+                  class="w-full border-b border-gray-300 py-2 focus:outline-none text-sm text-blue-400"
+                  placeholder="Ceritakan detail barang..."></textarea>
+      </div>
 
-    <textarea name="description" placeholder="Deskripsi Barang" rows="4"
-              class="w-full p-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+      <div>
+        <label class="block text-sm text-gray-700">Lokasi Hilang</label>
+        <input type="text" name="location" required
+               class="w-full border-b border-gray-300 py-2 focus:outline-none text-sm text-blue-400"
+               placeholder="Lokasi kehilangan" />
+      </div>
 
-    <input type="text" name="location" placeholder="Lokasi Kehilangan / Penemuan"
-           class="w-full p-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+      <div>
+        <label class="block text-sm text-gray-700">Kontak</label>
+        <input type="text" name="contact" required
+               class="w-full border-b border-gray-300 py-2 focus:outline-none text-sm text-blue-400"
+               placeholder="No. WA / Email" />
+      </div>
 
-    <input type="text" name="contact" placeholder="Kontak Pelapor (Email / No HP)"
-           class="w-full p-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
-
-    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
-      Kirim Laporan
-    </button>
-  </form>
+      <button type="submit"
+              class="w-full py-2 rounded-full bg-blue-400 text-white font-semibold hover:opacity-90 transition">
+        KIRIM LAPORAN
+      </button>
+    </form>
+  </div>
 </div>
 {% endblock %}

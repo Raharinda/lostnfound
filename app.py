@@ -3,10 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# ====== KONFIGURASI DATABASE ======
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  # file database lokal
+# ====== KONFIG DATABASE ======
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
 
 # ====== MODEL DATABASE ======
@@ -26,39 +25,23 @@ class Project(db.Model):
     def __repr__(self):
         return f'<Project {self.title}>'
 
-# ====== ROUTE UTAMA ======
-@app.route('/')
-def index():
-    reports = Report.query.all()  
-    return render_template('index.html', reports=reports)
-
-
-# ====== ROUTE TAMBAHAN UNTUK NAVBAR ======
-@app.route('/navbar')
-def navbar():
-    return render_template('navbar.html')
-
-# ====== FITUR TAMBAHAN ======
-@app.route('/search')
-def search():
-    query = request.args.get('q', '')
-    # Contoh pencarian di tabel Project
-    projects = Project.query.filter(Project.title.contains(query)).all()
-    return render_template('index.html', projects=projects)
-
-# REPORT #
 class Report(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)           # nama pelapor
-    item_name = db.Column(db.String(100), nullable=False)      # nama barang
-    description = db.Column(db.Text, nullable=True)            # deskripsi barang
-    location = db.Column(db.String(120), nullable=False)       # lokasi kehilangan / penemuan
-    contact = db.Column(db.String(100), nullable=False)        # kontak pelapor
-    status = db.Column(db.String(20), default="Belum ditemukan")  # status laporan
+    name = db.Column(db.String(100), nullable=False)
+    item_name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    location = db.Column(db.String(120), nullable=False)
+    contact = db.Column(db.String(100), nullable=False)
+    status = db.Column(db.String(20), default="Belum ditemukan")
 
     def __repr__(self):
         return f'<Report {self.item_name}>'
 
+# ====== ROUTE ======
+@app.route('/')
+def index():
+    reports = Report.query.all()
+    return render_template('index.html', reports=reports)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
@@ -81,9 +64,17 @@ def report():
         db.session.commit()
         return redirect('/')
 
-    # 🟢 ini kuncinya: render halaman di folder "report"
     return render_template('report/index.html')
 
+@app.route('/navbar')
+def navbar():
+    return render_template('navbar.html')
+
+@app.route('/search')
+def search():
+    query = request.args.get('q', '')
+    projects = Project.query.filter(Project.title.contains(query)).all()
+    return render_template('index.html', projects=projects)
 
 @app.route('/notifications')
 def notifications():
@@ -118,10 +109,8 @@ def toggle_theme():
     return jsonify({'success': True})
 
 
-# ====== JALANKAN SERVER ======
+# ====== RUN APP ======
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # membuat tabel kalau belum ada
+        db.create_all()
     app.run(debug=True)
-
-    

@@ -82,11 +82,11 @@ def notifications():
 
 @app.route('/signup')
 def signup():
-    return render_template('signup.html')
+    return render_template('/auth/signup.html')
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    return render_template('/auth/login.html')
 
 @app.route('/profile')
 def profile():

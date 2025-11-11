@@ -3,11 +3,11 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<di class="flex justify-center">
+<div class="flex justify-center">
   <body class="min-h-screen flex items-center justify-center bg-gray-800">
 
   <div class="bg-white rounded-xl shadow-xl p-10 w-full max-w-sm">
-    <h2 class="text-2xl font-bold text-blue-500 text-center mb-8">Sign Up</h2>
+    <h2 class="text-2xl font-bold text-blue-400 text-center mb-8">Sign Up</h2>
 
     <form class="space-y-6">
 
@@ -16,7 +16,7 @@
         <label class="block text-sm mb-2 text-gray-700">Nama</label>
         <div class="flex items-center border-b border-gray-300 pb-2">
           <input type="text" placeholder="Type your name"
-            class="w-full focus:outline-none text-sm" />
+            class="w-full focus:outline-none text-sm text-blue-400" />
         </div>
       </div>
 
@@ -25,7 +25,7 @@
         <label class="block text-sm mb-2 text-gray-700">NIM</label>
         <div class="flex items-center border-b border-gray-300 pb-2">
           <input type="text" placeholder="Type your NIM"
-            class="w-full focus:outline-none text-sm" />
+            class="w-full focus:outline-none text-sm text-blue-400" />
         </div>
       </div>
 
@@ -56,7 +56,7 @@
 
     <div class="text-center mt-8">
       <p class="text-sm text-gray-500">Already have an account?</p>
-      <a href="login.html" class="text-blue-500 text-sm font-semibold hover:underline">LOGIN</a>
+      <a href="{{ url_for('login') }}" class="text-blue-500 text-sm font-semibold hover:underline">LOGIN</a>
     </div>
   </div>
 

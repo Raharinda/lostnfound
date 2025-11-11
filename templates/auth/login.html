@@ -5,7 +5,7 @@
 {% block content %}
 <div class="flex justify-center">
 <div class="bg-white rounded-xl shadow-xl p-10 w-full max-w-sm">
-  <h2 class="text-2xl font-bold text-center mb-8">Login</h2>
+  <h2 class="text-2xl font-bold text-blue-400 text-center mb-8">Login</h2>
 
   <form class="space-y-6">
 
@@ -14,7 +14,7 @@
       <label class="block text-sm mb-2 text-gray-700">Username</label>
       <div class="flex items-center border-b border-gray-300 pb-2">
         <input type="text" placeholder="Type your username"
-          class="w-full focus:outline-none text-sm" />
+          class="w-full focus:outline-none text-sm text-blue-400" />
       </div>
     </div>
 
@@ -23,7 +23,7 @@
       <label class="block text-sm mb-2 text-gray-700">Password</label>
       <div class="flex items-center border-b border-gray-300 pb-2">
         <input type="password" placeholder="Type your password"
-          class="w-full focus:outline-none text-sm" />
+          class="w-full focus:outline-none text-sm text-blue-400" />
       </div>
       <div class="text-right mt-1">
         <a href="#" class="text-blue-500 text-sm hover:underline">Forgot password?</a>
@@ -39,7 +39,7 @@
 
   <div class="text-center mt-8">
     <p class="text-sm text-gray-500">Or Sign Up Using</p>
-    <a href="#" class="text-blue-500 text-sm font-semibold hover:underline">SIGN UP</a>
+    <a href="{{ url_for('signup') }}" class="text-blue-500 text-sm font-semibold hover:underline">SIGN UP</a>
   </div>
 </div>
 </div>

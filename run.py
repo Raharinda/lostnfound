@@ -4,5 +4,5 @@ app = create_app()
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()   # ← penting! ini yang bikin file data.db dan tabelnya
+        db.create_all()  
     app.run(debug=True)

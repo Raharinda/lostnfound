@@ -25,33 +25,79 @@
 
 <!-- List Section -->
 <section class="container mx-auto px-4">
-  <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">Daftar Barang Hilang / Ditemukan</h2>
+  {% if query %}
+    <h2 class="text-2xl font-bold text-blue-800 mb-6 text-center">
+      Hasil pencarian untuk: "{{ query }}"
+    </h2>
+  {% else %}
+    <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">
+      Daftar Barang Hilang / Ditemukan
+    </h2>
+  {% endif %}
 
   {% if reports %}
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {% for r in reports %}
-    <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
-      <div class="h-48 w-full bg-blue-100 flex items-center justify-center text-blue-500 text-xl font-bold">
-        📦 {{ r.item_name }}
-      </div>
-      <div class="p-5 text-blue-800">
-        <h3 class="text-xl font-bold">{{ r.item_name }}</h3>
-        <p class="text-sm text-gray-600 mb-1">Dilaporkan oleh {{ r.name }}</p>
-        <p class="text-gray-700 mt-2">{{ r.description or 'Tidak ada deskripsi' }}</p>
-        <p class="mt-2 text-sm"><strong>Lokasi:</strong> {{ r.location }}</p>
-        <p class="mt-1 text-sm"><strong>Kontak:</strong> {{ r.contact }}</p>
-        <p class="mt-2">
-          <span class="inline-block px-3 py-1 rounded-full text-white text-sm 
-          {% if r.status == 'Hilang' %}bg-red-500{% else %}bg-green-500{% endif %}">
-            {{ r.status }}
-          </span>
-        </p>
-      </div>
+  {% for r in reports %}
+  <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 border border-blue-100">
+    <div class="h-48 w-full bg-blue-100 flex items-center justify-center text-blue-500 text-xl font-bold">
+      {{ r.item_name }}
     </div>
-    {% endfor %}
+
+    <div class="p-5 text-blue-800">
+      <h3 class="text-xl font-bold">{{ r.item_name }}</h3>
+      <p class="text-sm text-gray-600 mb-1">Dilaporkan oleh {{ r.name }}</p>
+      <p class="text-gray-700 mt-2">{{ r.description or 'Tidak ada deskripsi' }}</p>
+      <p class="mt-2 text-sm"><strong>Lokasi:</strong> {{ r.location }}</p>
+      <p class="mt-1 text-sm"><strong>Kontak:</strong> {{ r.contact }}</p>
+    </div>
+
+    <!-- Footer Card -->
+    <div class="flex justify-between items-center px-6 py-4 border-t border-gray-300 bg-white">
+  <!-- Bagian kiri: dua badge sejajar -->
+  <div class="flex gap-3 items-center">
+    <!-- Status badge -->
+    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-white text-sm font-semibold shadow-sm
+          {% if r.status == 'Belum ditemukan' or r.status == 'Hilang' %}
+            bg-red-500
+          {% else %}
+            bg-green-500
+          {% endif %}">
+      {{ r.status }}
+    </span>
+    
+    <!-- Jenis laporan badge -->
+    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-white text-sm font-semibold shadow-sm
+          {% if r.report_type == 'lost' %}
+            bg-red-500
+          {% else %}
+            bg-blue-500
+          {% endif %}">
+      {{ r.report_type|upper }}
+    </span>
   </div>
+  
+  <!-- Bagian kanan: waktu -->
+<span class="text-sm text-gray-700 font-semibold">
+  {{ r.created_at_wib.strftime("%d %b %Y • %H:%M WIB") if r.created_at_wib else 'Waktu tidak diketahui' }}
+</span>
+
+
+
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
   {% else %}
-  <p class="text-center text-gray-600 mt-10 text-lg">Belum ada laporan barang yang tercatat.</p>
+  <p class="text-center text-gray-600 mt-10 text-lg">
+    {% if query %}
+      Tidak ada hasil untuk "{{ query }}".
+    {% else %}
+      Belum ada laporan barang yang tercatat.
+    {% endif %}
+  </p>
   {% endif %}
 </section>
 {% endblock %}

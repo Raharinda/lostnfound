@@ -1,5 +1,7 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime, timezone
+import pytz   # 🟢 tambahin baris ini biar fungsi created_at_wib bisa jalan
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,3 +29,23 @@ class Report(db.Model):
     location = db.Column(db.String(120), nullable=False)
     contact = db.Column(db.String(100), nullable=False)
     status = db.Column(db.String(20), default="Belum ditemukan")
+    report_type = db.Column(db.String(10), nullable=False, default='lost')
+    created_at = db.Column(
+        db.DateTime,
+        default=lambda: datetime.now(timezone.utc).replace(tzinfo=timezone.utc)
+    )
+
+    @property
+    def created_at_wib(self):
+        """Konversi waktu UTC atau naive ke WIB"""
+        if not self.created_at:
+            return None
+
+        jakarta = pytz.timezone("Asia/Jakarta")
+        utc_time = self.created_at
+
+        # kalau masih naive, anggap UTC
+        if utc_time.tzinfo is None:
+            utc_time = pytz.utc.localize(utc_time)
+
+        return utc_time.astimezone(jakarta)

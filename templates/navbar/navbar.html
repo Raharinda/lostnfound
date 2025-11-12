@@ -3,7 +3,7 @@
   <div class="flex gap-4">
   <a href="/" class="text-blue-400 font-bold p-2 text-xl">Lost n Found</a>
 
-  <form action="/search" method="GET" class="flex items-center bg-slate-800 rounded-lg px-3">
+  <form action="{{ url_for('main_bp.index') }}" method="GET" class="flex items-center bg-slate-800 rounded-lg px-3">
     <input 
       type="text" 
       name="q" 

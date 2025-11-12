@@ -19,7 +19,7 @@
 
   <div class="flex items-center gap-6">
     <a href="/" class="text-gray-200 hover:text-blue-400 transition-colors duration-300">Home</a>
-    <a href="/profile" class="text-gray-200 hover:text-blue-400 transition-colors duration-300">Profile</a>
+    <a href="{{ url_for('profiles_bp.profile') }}" class="text-gray-200 hover:text-blue-400 transition-colors duration-300">Profile</a>
 
     <!-- Auth buttons -->
     <div class="flex gap-3">

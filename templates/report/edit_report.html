@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Edit Laporan{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-800">
+  <div class="bg-white rounded-xl shadow-xl p-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold text-blue-400 text-center mb-6">Edit Laporan</h2>
+
+    <form method="POST" class="space-y-4">
+      <div>
+        <label class="block text-sm mb-1">Nama Barang</label>
+        <input type="text" name="item_name" value="{{ report.item_name }}" required
+               class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500" />
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">Deskripsi</label>
+        <textarea name="description" rows="3"
+                  class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500">{{ report.description }}</textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">Lokasi</label>
+        <input type="text" name="location" value="{{ report.location }}" required
+               class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500" />
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">Kontak</label>
+        <input type="text" name="contact" value="{{ report.contact }}" required
+               class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500" />
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">Status</label>
+        <select name="status" class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500">
+          <option value="Belum ditemukan" {% if report.status == 'Belum ditemukan' %}selected{% endif %}>Belum ditemukan</option>
+          <option value="Sudah ditemukan" {% if report.status == 'Sudah ditemukan' %}selected{% endif %}>Sudah ditemukan</option>
+        </select>
+      </div>
+
+      <button type="submit" class="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition">
+        Simpan Perubahan
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

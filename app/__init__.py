@@ -24,10 +24,13 @@ def create_app():
     from app.auth.routes import auth_bp
     from app.report.routes import report_bp
     from app.project.routes import project_bp
+    from app.profiles.routes import profiles_bp
+
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(report_bp, url_prefix='/report')
     app.register_blueprint(project_bp, url_prefix='/project')
+    app.register_blueprint(profiles_bp, url_prefix='/profile')
 
     return app

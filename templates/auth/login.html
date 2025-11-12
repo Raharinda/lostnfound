@@ -3,7 +3,9 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="min-h-screen flex items-center justify-center bg-gray-800">
+<div class="flex justify-center">
+  <body class="min-h-screen flex items-center justify-center bg-gray-800">
+
   <div class="bg-white rounded-xl shadow-xl p-10 w-full max-w-sm">
     <h2 class="text-2xl font-bold text-blue-400 text-center mb-8">Login</h2>
 
@@ -14,7 +16,6 @@
       <div>
         <label class="block text-sm mb-2 text-gray-700">Email</label>
         <div class="flex items-center border-b border-gray-300 pb-2">
-          <!-- tambahkan name -->
           <input 
             type="email" 
             name="email"
@@ -28,7 +29,6 @@
       <div>
         <label class="block text-sm mb-2 text-gray-700">Password</label>
         <div class="flex items-center border-b border-gray-300 pb-2">
-          <!-- tambahkan name -->
           <input 
             type="password"
             name="password"
@@ -52,8 +52,12 @@
     <!-- SIGN UP LINK -->
     <div class="text-center mt-8">
       <p class="text-sm text-gray-500">Belum punya akun?</p>
-      <a href="{{ url_for('auth_bp.signup') }}" class="text-blue-500 text-sm font-semibold hover:underline">SIGN UP</a>
+      <a href="{{ url_for('auth_bp.signup') }}" 
+         class="text-blue-500 text-sm font-semibold hover:underline">SIGN UP</a>
     </div>
   </div>
+
+</body>  
 </div>
+
 {% endblock %}

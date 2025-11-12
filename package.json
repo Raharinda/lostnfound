@@ -1,10 +1,11 @@
 {
   "name": "lostnfound",
   "version": "1.0.0",
-  "description": "",
+  "description": "Lost and Found App Project Web Based Project PROKOM UGM/TRi/25",
   "main": "tailwind.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tailwindcss -i ./static/src/input.css -o ./static/css/tailwind.css --minify",
+    "watch": "npx tailwindcss -i ./static/src/input.css -o ./static/css/tailwind.css --watch"
   },
   "repository": {
     "type": "git",
@@ -13,12 +14,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Raharinda/lostnfound/issues"
   },
   "homepage": "https://github.com/Raharinda/lostnfound#readme",
   "devDependencies": {
-    "tailwindcss": "^4.1.16"
+    "tailwindcss": "^3.4.13"
   }
 }

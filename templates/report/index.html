@@ -9,7 +9,10 @@
       Buat Laporan Kehilangan
     </h2>
 
-    <form method="POST" action="{{ url_for('report_bp.report') }}" class="space-y-5">
+    <form method="POST" action="{{ url_for('report_bp.report') }}" 
+      enctype="multipart/form-data"
+      class="space-y-5">
+
       <!-- Pilih jenis laporan -->
       <div>
         <label class="block text-sm text-gray-700">Jenis Laporan</label>

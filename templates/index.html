@@ -2,6 +2,7 @@
 {% block title %}Home - Lost & Found UGM{% endblock %}
 
 {% block content %}
+
 <!-- Hero Section -->
 <section class="relative bg-gradient-to-br from-blue-800 to-blue-600 text-white py-20 rounded-2xl shadow-lg mb-12 overflow-hidden">
   <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/geometry.png')]"></div>
@@ -9,22 +10,24 @@
   <div class="relative container mx-auto px-6 text-center z-10">
     <img src="https://via.placeholder.com/200" alt="Logo UGM" 
          class="mx-auto mb-6 w-28 h-28 rounded-full bg-white p-2 shadow-lg">
-    
+
     <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Lost & Found UGM</h1>
     <p class="text-blue-100 text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
       Mengembalikan Barang, Menyambung Kebaikan.  
       Temukan atau laporkan barang hilang di lingkungan Universitas Gadjah Mada.
     </p>
-    
+
+    <!-- Tombol tetap sama -->
     <a href="{{ url_for('report_bp.report') }}" 
        class="bg-yellow-400 text-blue-900 font-semibold px-8 py-3 rounded-full shadow-md hover:bg-yellow-300 transition">
-       💼 Laporkan Barang Hilang / Ditemukan
+      💼 Laporkan Barang Hilang / Ditemukan
     </a>
   </div>
 </section>
 
 <!-- List Section -->
 <section class="container mx-auto px-4">
+
   {% if query %}
     <h2 class="text-2xl font-bold text-blue-800 mb-6 text-center">
       Hasil pencarian untuk: "{{ query }}"
@@ -36,76 +39,75 @@
   {% endif %}
 
   {% if reports %}
+
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
   {% for r in reports %}
-  <div class="h-48 w-full overflow-hidden">
-  {% if r.image_url %}
-    <img src="{{ r.image_url }}" 
-         alt="{{ r.item_name }}"
-         class="w-full h-full object-cover">
-  {% else %}
-    <div class="w-full h-full bg-blue-100 flex items-center justify-center text-blue-500 text-xl font-bold">
-      {{ r.item_name }}
-    </div>
-  {% endif %}
-</div>
-
-
-    <div class="p-5 text-blue-800">
-      <h3 class="text-xl font-bold">{{ r.item_name }}</h3>
-      <p class="text-sm text-gray-600 mb-1">Dilaporkan oleh {{ r.name }}</p>
-      <p class="text-gray-700 mt-2">{{ r.description or 'Tidak ada deskripsi' }}</p>
-      <p class="mt-2 text-sm"><strong>Lokasi:</strong> {{ r.location }}</p>
-      <p class="mt-1 text-sm"><strong>Kontak:</strong> {{ r.contact }}</p>
-    </div>
-
-    <!-- Footer Card -->
-    <div class="flex justify-between items-center px-6 py-4 border-t border-gray-300 bg-white">
-  <!-- Bagian kiri: dua badge sejajar -->
-  <div class="flex gap-3 items-center">
-    <!-- Status badge -->
-    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-white text-sm font-semibold shadow-sm
-          {% if r.status == 'Belum ditemukan' or r.status == 'Hilang' %}
-            bg-red-500
-          {% else %}
-            bg-green-500
-          {% endif %}">
-      {{ r.status }}
-    </span>
     
-    <!-- Jenis laporan badge -->
-    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-white text-sm font-semibold shadow-sm
-          {% if r.report_type == 'lost' %}
-            bg-red-500
-          {% else %}
-            bg-blue-500
-          {% endif %}">
-      {{ r.report_type|upper }}
-    </span>
-  </div>
-  
-  <!-- Bagian kanan: waktu -->
-<span class="text-sm text-gray-700 font-semibold">
-  {{ r.created_at_wib.strftime("%d %b %Y • %H:%M WIB") if r.created_at_wib else 'Waktu tidak diketahui' }}
-</span>
+    <!-- Start Card -->
+    <div class="bg-white rounded-xl shadow overflow-hidden">
 
+      <!-- Gambar -->
+      <div class="h-48 w-full overflow-hidden">
+        {% if r.image_url %}
+          <img src="{{ url_for('static', filename='uploads/' ~ r.image_url) }}"
+            alt="{{ r.item_name }}"
+     class="w-full h-full object-cover">
+        {% else %}
+          <div class="w-full h-full bg-blue-100 flex items-center justify-center text-blue-500 text-xl font-bold">
+            {{ r.item_name }}
+          </div>
+        {% endif %}
+      </div>
 
+      <!-- Isi Card -->
+      <div class="p-5 text-blue-800">
+        <h3 class="text-xl font-bold">{{ r.item_name }}</h3>
+        <p class="text-sm text-gray-600 mb-1">Dilaporkan oleh {{ r.name }}</p>
+        <p class="text-gray-700 mt-2">{{ r.description or 'Tidak ada deskripsi' }}</p>
+        
+        <p class="mt-2 text-sm"><strong>Lokasi:</strong> {{ r.location }}</p>
+        <p class="mt-1 text-sm"><strong>Kontak:</strong> {{ r.contact }}</p>
+      </div>
 
+      <!-- Footer Badge -->
+      <div class="flex justify-between items-center px-5 py-3 border-t bg-white">
+
+        <div class="flex gap-2">
+
+          <!-- Status -->
+          <span class="px-3 py-1 rounded-full text-white text-sm font-semibold shadow-sm
+            {% if r.status in ['Belum ditemukan', 'Hilang'] %} bg-red-500 {% else %} bg-green-500 {% endif %}">
+            {{ r.status }}
+          </span>
+
+          <!-- Jenis laporan -->
+          <span class="px-3 py-1 rounded-full text-white text-sm font-semibold shadow-sm
+            {% if r.report_type == 'lost' %} bg-red-500 {% else %} bg-blue-500 {% endif %}">
+            {{ r.report_type|upper }}
+          </span>
+        </div>
+
+        <span class="text-sm text-gray-700 font-semibold">
+          {{ r.created_at_wib.strftime("%d %b %Y • %H:%M WIB") if r.created_at_wib else 'Waktu tidak diketahui' }}
+        </span>
+
+      </div>
 
     </div>
-  </div>
-  {% endfor %}
-</div>
+    <!-- End Card -->
 
+  {% endfor %}
+  </div>
 
   {% else %}
-  <p class="text-center text-gray-600 mt-10 text-lg">
-    {% if query %}
-      Tidak ada hasil untuk "{{ query }}".
-    {% else %}
-      Belum ada laporan barang yang tercatat.
-    {% endif %}
-  </p>
+    <p class="text-center text-gray-600 mt-10 text-lg">
+      {% if query %}
+        Tidak ada hasil untuk "{{ query }}".
+      {% else %}
+        Belum ada laporan barang yang tercatat.
+      {% endif %}
+    </p>
   {% endif %}
 </section>
+
 {% endblock %}

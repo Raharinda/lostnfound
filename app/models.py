@@ -25,6 +25,7 @@ class Report(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     name = db.Column(db.String(100), nullable=False)
     item_name = db.Column(db.String(100), nullable=False)
+    image_url = db.Column(db.String(255))
     description = db.Column(db.Text, nullable=True)
     location = db.Column(db.String(120), nullable=False)
     contact = db.Column(db.String(100), nullable=False)

@@ -11,7 +11,6 @@ def create_app():
     TEMPLATE_DIR = os.path.join(BASE_DIR, '../templates')
     STATIC_DIR = os.path.join(BASE_DIR, '../static')
 
-    # INI YANG KAMU LUPA
     app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'

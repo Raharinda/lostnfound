@@ -47,17 +47,19 @@
     <div class="bg-white rounded-xl shadow overflow-hidden">
 
       <!-- Gambar -->
-      <div class="h-48 w-full overflow-hidden">
-        {% if r.image_url %}
-          <img src="{{ url_for('static', filename='uploads/' ~ r.image_url) }}"
-            alt="{{ r.item_name }}"
-     class="w-full h-full object-cover">
-        {% else %}
-          <div class="w-full h-full bg-blue-100 flex items-center justify-center text-blue-500 text-xl font-bold">
-            {{ r.item_name }}
-          </div>
-        {% endif %}
-      </div>
+<!-- Gambar -->
+    <div class="h-72 w-full overflow-hidden">
+      {% if r.image_url %}
+        <img src="{{ url_for('static', filename='uploads/' ~ r.image_url) }}"
+          alt="{{ r.item_name }}"
+          class="w-full h-full object-cover">
+      {% else %}
+        <div class="w-full h-full bg-blue-100 flex items-center justify-center text-blue-500 text-2xl font-bold">
+          {{ r.item_name }}
+        </div>
+      {% endif %}
+    </div>
+
 
       <!-- Isi Card -->
       <div class="p-5 text-blue-800">

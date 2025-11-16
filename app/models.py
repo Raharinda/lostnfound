@@ -1,7 +1,7 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timezone
-import pytz   # 🟢 tambahin baris ini biar fungsi created_at_wib bisa jalan
+import pytz   
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -19,7 +19,7 @@ def report_page():
             ext = file.filename.rsplit('.', 1)[-1].lower()
             filename = f"{uuid.uuid4().hex}.{ext}"
 
-            upload_dir = os.path.join(current_app.root_path, 'static', 'uploads')
+            upload_dir = os.path.abspath(os.path.join(current_app.root_path, '..', 'static', 'uploads'))
             os.makedirs(upload_dir, exist_ok=True)
 
             file.save(os.path.join(upload_dir, filename))

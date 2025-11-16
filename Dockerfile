@@ -1,3 +1,4 @@
+
 # Base image Python
 FROM python:3.11-slim
 
@@ -21,3 +22,4 @@ EXPOSE 8080
 
 # Run Flask App
 CMD ["python", "app.py"]
+

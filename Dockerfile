@@ -1,25 +1,21 @@
-
-# Base image Python
 FROM python:3.11-slim
 
-# Set working directory
-WORKDIR /app
+# Prevent Python from writing pyc files & force stdout flush
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Install system deps (optional)
-RUN apt-get update && apt-get install -y curl && apt-get clean
+WORKDIR /app
 
 # Copy requirements
 COPY requirements.txt .
 
-# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the whole project
+# Copy entire project
 COPY . .
 
-# Expose the port Fly will route traffic to
+# Expose Flask port
 EXPOSE 8080
 
-# Run Flask App
-CMD ["python", "app.py"]
-
+# Run the Flask app
+CMD ["python", "run.py"]

@@ -42,10 +42,12 @@ def google_callback():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        # kalau belum ada → auto register
+    # auto-register untuk user dari Google
         user = User(username=name, email=email)
+        user.set_password(os.urandom(16).hex())  # password dummy biar tidak null
         db.session.add(user)
         db.session.commit()
+
 
     # login user
     session["user_id"] = user.id

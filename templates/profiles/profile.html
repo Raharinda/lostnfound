@@ -21,7 +21,7 @@
     {% if reports %}
     <div class="grid sm:grid-cols-2 gap-6">
       {% for r in reports %}
-      <div class="bg-blue-50 p-4 rounded-lg shadow-md">
+      <div class= p-4 rounded-lg shadow-md">
         <h4 class="text-xl font-bold">{{ r.item_name }}</h4>
         <p class="text-sm text-gray-700">{{ r.description or 'Tidak ada deskripsi' }}</p>
         <p class="text-sm text-gray-500 mt-2">Lokasi: {{ r.location }}</p>

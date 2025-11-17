@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Admin Panel - Reports{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-blue-800 p-10">
+
+  <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-xl p-8">
+
+    <h2 class="text-3xl font-bold text-blue-500 mb-6">
+      Admin Panel — Kelola Reports
+    </h2>
+
+    {% if reports %}
+    <table class="w-full border border-blue-800 rounded-lg overflow-hidden">
+
+      <thead class="bg-blue-500 text-white">
+        <tr>
+          <th class="px-4 py-2 text-left">ID</th>
+          <th class="px-4 py-2 text-left">Item</th>
+          <th class="px-4 py-2 text-left">Lokasi</th>
+          <th class="px-4 py-2 text-left">User ID</th>
+          <th class="px-4 py-2 text-left">Status</th>
+          <th class="px-4 py-2 text-left">Aksi</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for r in reports %}
+        <tr class="border-b hover:bg-gray-50 text-blue-500 transition">
+          <td class="px-4 py-2">{{ r.id }}</td>
+          <td class="px-4 py-2">{{ r.item_name }}</td>
+          <td class="px-4 py-2">{{ r.location }}</td>
+          <td class="px-4 py-2">{{ r.user_id }}</td>
+          <td class="px-4 py-2">
+            <span class="px-2 py-1 rounded text-white 
+              {% if r.status == 'Belum ditemukan' %}
+                bg-red-400
+              {% else %}
+                bg-green-500
+              {% endif %}
+            ">
+              {{ r.status }}
+            </span>
+          </td>
+          <td class="px-4 py-2">
+            <a href="{{ url_for('admin_bp.admin_delete_report', report_id=r.id) }}"
+               class="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+               onclick="return confirm('Hapus report ini?');">
+              Hapus
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+    {% else %}
+      <p class="text-gray-600">Belum ada report.</p>
+    {% endif %}
+
+  </div>
+
+</div>
+{% endblock %}

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from app import oauth
 from app.models import db, User
 
 auth_bp = Blueprint('auth_bp', __name__)
@@ -22,6 +23,37 @@ def signup():
         flash('Registrasi berhasil! Silakan login.', 'success')
         return render_template('auth/signup_success.html', username=username)
     return render_template('auth/signup.html')
+
+@auth_bp.route("/login/google")
+def google_login():
+    redirect_uri = url_for("auth_bp.google_callback", _external=True)
+    return oauth.google.authorize_redirect(redirect_uri)
+
+
+@auth_bp.route("/google/callback")
+def google_callback():
+    token = oauth.google.authorize_access_token()
+    user_info = oauth.google.userinfo()
+
+    email = user_info.get("email")
+    name = user_info.get("name")
+
+    # cek apakah user sudah ada
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        # kalau belum ada → auto register
+        user = User(username=name, email=email)
+        db.session.add(user)
+        db.session.commit()
+
+    # login user
+    session["user_id"] = user.id
+    session["username"] = user.username
+
+    flash(f"Selamat datang, {user.username}!", "success")
+    return redirect(url_for("main_bp.index"))
+
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():

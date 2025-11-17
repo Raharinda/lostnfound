@@ -9,4 +9,8 @@ flask
 flask_sqlalchemy
 flask_migrate
 pytz
+Authlib
+python-dotenv
+requests
+
 

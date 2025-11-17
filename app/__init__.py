@@ -45,6 +45,14 @@ def create_app():
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "supersecretkey")
 
     # ====================================
+    # SESSION SETTINGS (Google OAuth WAJIB)
+    # ====================================
+    app.config['SESSION_COOKIE_SECURE'] = True
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+
+
+    # ====================================
     # INIT EXTENSIONS
     # ====================================
     db.init_app(app)

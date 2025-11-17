@@ -53,6 +53,17 @@ def create_app():
 
 
     # ====================================
+    # UPLOAD SETTINGS (Fly.io Persistence)
+    # ====================================
+    if os.getenv("FLY_APP_NAME"):
+        app.config["UPLOAD_FOLDER"] = "/data/uploads"
+    else:
+        app.config["UPLOAD_FOLDER"] = os.path.join(ROOT_DIR, "static", "uploads")
+
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+
+
+    # ====================================
     # INIT EXTENSIONS
     # ====================================
     db.init_app(app)

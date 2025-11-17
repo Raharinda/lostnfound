@@ -13,7 +13,14 @@ def create_app():
 
     app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+    # DATABASE CONFIG
+    if os.getenv("FLY_APP_NAME"):
+        # Running on Fly.io → use persistent volume at /data
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data/data.db'
+    else:
+        # Local development → use local instance folder
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/data.db'
+
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'supersecretkey'
 

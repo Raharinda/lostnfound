@@ -8,31 +8,31 @@
 
     <form method="POST" class="space-y-4">
       <div>
-        <label class="block text-sm mb-1">Nama Barang</label>
+        <label class="block text-sm mb-1 text-blue-400">Nama Barang</label>
         <input type="text" name="item_name" value="{{ report.item_name }}" required
                class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500" />
       </div>
 
       <div>
-        <label class="block text-sm mb-1">Deskripsi</label>
+        <label class="block text-sm mb-1 text-blue-400">Deskripsi</label>
         <textarea name="description" rows="3"
                   class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500">{{ report.description }}</textarea>
       </div>
 
       <div>
-        <label class="block text-sm mb-1">Lokasi</label>
+        <label class="block text-sm mb-1 text-blue-400">Lokasi</label>
         <input type="text" name="location" value="{{ report.location }}" required
                class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500" />
       </div>
 
       <div>
-        <label class="block text-sm mb-1">Kontak</label>
+        <label class="block text-sm mb-1 text-blue-400">Kontak</label>
         <input type="text" name="contact" value="{{ report.contact }}" required
                class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500" />
       </div>
 
       <div>
-        <label class="block text-sm mb-1">Status</label>
+        <label class="block text-sm mb-1 text-blue-400">Status</label>
         <select name="status" class="w-full border-b border-gray-300 focus:outline-none text-sm text-blue-500">
           <option value="Belum ditemukan" {% if report.status == 'Belum ditemukan' %}selected{% endif %}>Belum ditemukan</option>
           <option value="Sudah ditemukan" {% if report.status == 'Sudah ditemukan' %}selected{% endif %}>Sudah ditemukan</option>

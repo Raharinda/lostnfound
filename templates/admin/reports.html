@@ -43,11 +43,14 @@
             </span>
           </td>
           <td class="px-4 py-2">
-            <a href="{{ url_for('admin_bp.admin_delete_report', report_id=r.id) }}"
-               class="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-               onclick="return confirm('Hapus report ini?');">
-              Hapus
-            </a>
+          <form method="POST" action="{{ url_for('report_bp.delete_report', report_id=r.id) }}" 
+                onsubmit="return confirm('Yakin ingin menghapus laporan ini?')" 
+                class="inline">
+              <button type="submit" 
+                      class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                  Hapus
+              </button>
+            </form>
           </td>
         </tr>
         {% endfor %}
